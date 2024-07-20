@@ -4,18 +4,16 @@ Created on Mon Oct  7 15:46:34 2019
 
 @author: Salar
 """
-
-
+import random as rn
 
 # importing libs
 import numpy as np
 import tensorflow as tf
-from keras.layers import Input, Dense, GaussianNoise
-from keras.models import Model
 from keras import regularizers
+from keras.layers import Dense, GaussianNoise, Input
 from keras.layers.normalization import BatchNormalization
+from keras.models import Model, load_model
 from keras.optimizers import SGD
-import random as rn
 
 # defining parameters
 M = 16 
@@ -78,7 +76,8 @@ autoencoder.fit(data, data,
                 batch_size=300,
                 validation_data=(val_data, val_data))
 
-from keras.models import load_model
+
+
 #autoencoder.save('4_7_symbol_autoencoder_v_best.model')
 
 #autoencoder_loaded = load_model('4_7_symbol_autoencoder_v_best.model')
@@ -132,6 +131,7 @@ for n in range(0,len(EbNodB_range)):
     print ('SNR:',EbNodB_range[n],'BER:',ber[n])
     
 import matplotlib.pyplot as plt
+
 plt.plot(EbNodB_range, ber, 'bo',label='Autoencoder(7,4)')
 #plt.plot(list(EbNodB_range), ber_theory, 'ro-',label='BPSK BER')
 plt.yscale('log')
@@ -142,5 +142,3 @@ plt.legend(loc='upper right',ncol = 1)
 
 plt.savefig('AutoEncoder_7_4_BER_matplotlib')
 plt.show()
-                    
-                    
