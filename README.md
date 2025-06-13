@@ -1,87 +1,81 @@
-# Telecommunication Projects
+# Telecommunication Research Projects
 
-This repository contains a collection of projects related to telecommunication, including agent prediction, authentication, digital communication, Gaussian wiretap channels, resource allocation, and traffic classification.
+This repository contains a collection of research and laboratory projects in telecommunications, focusing on various aspects of wireless communication, digital communication, network optimization, and security.
 
 ## Repository Structure
 
 ```
-├── AgentPrediction
-│   ├── README.md
-│   └── episode_mc.py
-├── AuthenticationWPL
-│   ├── CarrierFrequencyOffset.m
-│   ├── CfoCapturing.m
-│   ├── HTFE.m
-│   ├── Receiver.m
-│   ├── SDR_Receiver.m
-│   ├── SdruReciever.m
-│   ├── UsrpReceiving.m
-│   ├── fff.slx
-│   ├── lab_1.m
-│   └── runWLANNonHTReceiver.m
-├── DigitalCommunication
-│   ├── PRE_LAB04.m
-│   ├── PreLab3.m
-│   ├── code.m
-│   ├── dcl_prelab2.m
-│   └── message.wav
-├── GaussianWiretrapChannel
-│   ├── Gaussian_Wiretrap_Channel.py
-│   ├── MI_BER.ipynb
-│   └── Readme
-├── LICENSE
-├── README.md
-├── ResourceAllocation
-│   └── multi-knapsack.ipynb
-└── TrafficClassification
-    └── get_dataset.ipynb
+research/
+├── wireless_communication/
+│   └── GaussianWiretrapChannel/
+│       ├── Gaussian_Wiretrap_Channel.py
+│       ├── MI_BER.ipynb
+│       └── README.md
+├── digital_communication/
+│   └── DigitalCommunication/
+│       ├── PRE_LAB04.m
+│       ├── PreLab3.m
+│       ├── code.m
+│       ├── dcl_prelab2.m
+│       └── message.wav
+├── network_optimization/
+│   ├── ResourceAllocation/
+│   │   └── multi-knapsack.ipynb
+│   ├── TrafficClassification/
+│   │   └── get_dataset.ipynb
+│   └── AgentPrediction/
+│       └── episode_mc.py
+└── security/
+    └── AuthenticationWPL/
+        ├── CarrierFrequencyOffset.m
+        ├── CfoCapturing.m
+        ├── HTFE.m
+        ├── Receiver.m
+        ├── SDR_Receiver.m
+        ├── SdruReciever.m
+        ├── UsrpReceiving.m
+        ├── fff.slx
+        ├── lab_1.m
+        └── runWLANNonHTReceiver.m
 ```
 
-## Projects
+## Project Categories
 
-### AgentPrediction
+### Wireless Communication
+- **Gaussian Wiretap Channel**: Implementation and analysis of Gaussian wiretap channel models, including mutual information and bit error rate calculations.
 
-- **episode_mc.py**: Implementation of Monte Carlo algorithm for activity detection.
+### Digital Communication
+- **Digital Communication Labs**: MATLAB implementations for various digital communication concepts and laboratory exercises.
 
-### AuthenticationWPL
+### Network Optimization
+- **Resource Allocation**: Multi-knapsack problem implementation for resource allocation optimization.
+- **Traffic Classification**: Dataset processing and analysis for network traffic classification.
+- **Agent Prediction**: Monte Carlo algorithm implementation for activity detection and prediction.
 
-- **CarrierFrequencyOffset.m**: MATLAB script for carrier frequency offset.
-- **CfoCapturing.m**: MATLAB script for capturing CFO.
-- **HTFE.m**: MATLAB script.
-- **Receiver.m**: MATLAB script for receiver implementation.
-- **SDR_Receiver.m**: MATLAB script for SDR receiver.
-- **SdruReciever.m**: MATLAB script for SDRu receiver.
-- **UsrpReceiving.m**: MATLAB script for USRP receiving.
-- **fff.slx**: Simulink model.
-- **lab_1.m**: MATLAB script for lab 1.
-- **runWLANNonHTReceiver.m**: MATLAB script for running WLAN non-HT receiver.
+### Security
+- **Authentication WPL**: Wireless physical layer authentication implementations using MATLAB and USRP hardware.
 
-### DigitalCommunication
+## Development Guidelines
 
-- **PRE_LAB04.m**: MATLAB script for pre-lab 04.
-- **PreLab3.m**: MATLAB script for pre-lab 3.
-- **code.m**: MATLAB script.
-- **dcl_prelab2.m**: MATLAB script for pre-lab 2.
-- **message.wav**: Audio file used in the project.
+1. **Code Organization**:
+   - Each project should have its own README.md with specific setup and usage instructions
+   - Keep related files together in project-specific directories
+   - Use consistent naming conventions within each project
 
-### GaussianWiretrapChannel
+2. **Documentation**:
+   - Include clear comments in code
+   - Document dependencies and requirements
+   - Provide example usage where applicable
 
-- **Gaussian_Wiretrap_Channel.py**: Python script for Gaussian wiretap channel.
-- **MI_BER.ipynb**: Jupyter notebook for Mutual Information and Bit Error Rate analysis.
-- **Readme**: Documentation for the Gaussian Wiretrap Channel project.
-
-### ResourceAllocation
-
-- **multi-knapsack.ipynb**: Jupyter notebook for multi-knapsack problem in resource allocation.
-
-### TrafficClassification
-
-- **get_dataset.ipynb**: Jupyter notebook for obtaining and processing the dataset for traffic classification.
+3. **Version Control**:
+   - Use atomic commits for each logical change
+   - Write clear commit messages
+   - Keep the repository clean and organized
 
 ## License
 
 This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## Contact
+## Contributing
 
-For any questions or issues, please open an issue in this repository.
+For any questions, suggestions, or issues, please open an issue in this repository.
