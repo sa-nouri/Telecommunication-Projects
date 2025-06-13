@@ -1,3 +1,6 @@
+% Carrier Frequency Offset Estimation
+% This script estimates the carrier frequency offset (CFO) in a received signal.
+
 function [cfoCorrection , coarseFreqOffset ] = CarrierFrequencyOffset()
 
 

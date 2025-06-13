@@ -1,3 +1,20 @@
+% SDRu Receiver
+% This script implements a software-defined radio (SDR) receiver for USRP.
+
+function [output] = sdru_receiver(signal, fs)
+    % SDRU_RECEIVER Processes the received signal using SDR techniques for USRP.
+    %
+    % Args:
+    %     signal (array): Received signal.
+    %     fs (float): Sampling frequency.
+    %
+    % Returns:
+    %     array: Processed output signal.
+
+    % Apply a simple low-pass filter
+    output = lowpass(signal, fs/4, fs);
+end
+
 %% SDR Receiver ----
  clc ; close all ; clear ;
   

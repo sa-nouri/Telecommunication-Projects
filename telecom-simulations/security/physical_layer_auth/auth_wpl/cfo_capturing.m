@@ -1,3 +1,26 @@
+% CFO Capturing
+% This script captures the carrier frequency offset (CFO) from a received signal.
+
+function [cfo] = cfo_capturing(signal, fs)
+    % CFO_CAPTURING Captures the carrier frequency offset.
+    %
+    % Args:
+    %     signal (array): Received signal.
+    %     fs (float): Sampling frequency.
+    %
+    % Returns:
+    %     float: Captured carrier frequency offset.
+
+    % Compute the autocorrelation of the signal
+    autocorr = xcorr(signal);
+    
+    % Find the peak of the autocorrelation
+    [~, peak_idx] = max(autocorr);
+    
+    % Capture the CFO
+    cfo = (peak_idx - length(signal)) * fs / length(signal);
+end
+
 function   CfoCapturing(WiFiChannelCenterFreq,Config)
 
 %   Copyright 2015-2016 The MathWorks, Inc.

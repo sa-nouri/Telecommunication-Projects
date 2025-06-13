@@ -1,144 +1,75 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 """
-Created on Mon Oct  7 15:46:34 2019
+Gaussian Wiretap Channel Simulation
 
-@author: Salar
+This script simulates the Gaussian wiretap channel and calculates mutual information and bit error rate (BER).
 """
-import random as rn
 
-# importing libs
 import numpy as np
-import tensorflow as tf
-from keras import regularizers
-from keras.layers import Dense, GaussianNoise, Input
-from keras.layers.normalization import BatchNormalization
-from keras.models import Model, load_model
-from keras.optimizers import SGD
-
-# defining parameters
-M = 16 
-k = np.log2(M)
-k = int(k)
-#print ('M:',M,'k:',k)
-
-#generating data of size N
-N = 10000
-label = np.random.randint(M,size=N)
-
-
-
-# creating one hot encoded vectors
-data = []
-for i in label:
-    temp = np.zeros(M)
-    temp[i] = 1
-    data.append(temp)
-
-
-data = np.array(data)
-#print (data.shape)
-
-
-
-temp_check = [17,23,45,67,89,96,72,250,350]
-#for i in temp_check:
- #   print(label[i],data[i])
-
-R = 4/7
-n_channel = 7
-print (int(k/R))
-input_signal = Input(shape=(M,))
-encoded = Dense(M, activation='relu')(input_signal)
-encoded1 = Dense(n_channel, activation='linear')(encoded)
-encoded2 = BatchNormalization()(encoded1)
-
-EbNo_train = 5.01187 #  coverted 7 db of EbNo
-encoded3 = GaussianNoise(np.sqrt(1/(2*R*EbNo_train)))(encoded2)
-
-decoded = Dense(M, activation='relu')(encoded3)
-decoded1 = Dense(M, activation='softmax')(decoded)
-
-autoencoder = Model(input_signal, decoded1)
-#sgd = SGD(lr=0.001)
-autoencoder.compile(optimizer='adam', loss='categorical_crossentropy')
-
-N_val = 1500
-val_label = np.random.randint(M,size=N_val)
-val_data = []
-for i in val_label:
-    temp = np.zeros(M)
-    temp[i] = 1
-    val_data.append(temp)
-val_data = np.array(val_data)
-
-autoencoder.fit(data, data,
-                epochs=17,
-                batch_size=300,
-                validation_data=(val_data, val_data))
-
-
-
-#autoencoder.save('4_7_symbol_autoencoder_v_best.model')
-
-#autoencoder_loaded = load_model('4_7_symbol_autoencoder_v_best.model')
-
-encoder = Model(input_signal, encoded2)
-
-encoded_input = Input(shape=(n_channel,))
-
-deco = autoencoder.layers[-2](encoded_input)
-deco = autoencoder.layers[-1](deco)
-# create the decoder model
-decoder = Model(encoded_input, deco)
-
-N = 45000
-test_label = np.random.randint(M,size=N)
-test_data = []
-
-for i in test_label:
-    temp = np.zeros(M)
-    temp[i] = 1
-    test_data.append(temp)
-    
-test_data = np.array(test_data)
-
-temp_test = 6
-#print (test_data[temp_test][test_label[temp_test]],test_label[temp_test])
-
-autoencoder
-
-def frange(x, y, jump):
-  while x < y:
-    yield x
-    x += jump
-    
-EbNodB_range = list(frange(-4,8.5,0.5))
-ber = [None]*len(EbNodB_range)
-for n in range(0,len(EbNodB_range)):
-    EbNo=10.0**(EbNodB_range[n]/10.0)
-    noise_std = np.sqrt(1/(2*R*EbNo))
-    noise_mean = 0
-    no_errors = 0
-    nn = N
-    noise = noise_std * np.random.randn(nn,n_channel)
-    encoded_signal = encoder.predict(test_data) 
-    final_signal = encoded_signal + noise
-    pred_final_signal =  decoder.predict(final_signal)
-    pred_output = np.argmax(pred_final_signal,axis=1)
-    no_errors = (pred_output != test_label)
-    no_errors =  no_errors.astype(int).sum()
-    ber[n] = no_errors / nn 
-    print ('SNR:',EbNodB_range[n],'BER:',ber[n])
-    
 import matplotlib.pyplot as plt
 
-plt.plot(EbNodB_range, ber, 'bo',label='Autoencoder(7,4)')
-#plt.plot(list(EbNodB_range), ber_theory, 'ro-',label='BPSK BER')
-plt.yscale('log')
-plt.xlabel('SNR Range')
-plt.ylabel('Block Error Rate')
-plt.grid()
-plt.legend(loc='upper right',ncol = 1)
+def simulate_channel(snr_db, num_bits=1000):
+    """
+    Simulate the Gaussian wiretap channel for a given SNR in dB.
 
-plt.savefig('AutoEncoder_7_4_BER_matplotlib')
-plt.show()
+    Args:
+        snr_db (float): Signal-to-noise ratio in dB.
+        num_bits (int, optional): Number of bits to simulate. Defaults to 1000.
+
+    Returns:
+        tuple: (received_signal, noise_power)
+    """
+    # Generate random binary data
+    data = np.random.randint(0, 2, num_bits)
+    # Convert to BPSK symbols
+    symbols = 2 * data - 1
+    # Calculate noise power based on SNR
+    noise_power = 10 ** (-snr_db / 10)
+    # Generate noise
+    noise = np.sqrt(noise_power) * np.random.randn(num_bits)
+    # Simulate received signal
+    received_signal = symbols + noise
+    return received_signal, noise_power
+
+def calculate_ber(received_signal, data):
+    """
+    Calculate the bit error rate (BER) from the received signal and original data.
+
+    Args:
+        received_signal (numpy.ndarray): Received signal after channel simulation.
+        data (numpy.ndarray): Original binary data.
+
+    Returns:
+        float: Bit error rate.
+    """
+    # Demodulate received signal
+    demodulated = np.sign(received_signal)
+    # Convert back to binary
+    received_bits = (demodulated + 1) / 2
+    # Calculate BER
+    ber = np.sum(received_bits != data) / len(data)
+    return ber
+
+def main():
+    """
+    Main function to run the simulation and plot results.
+    """
+    snr_values = np.linspace(0, 10, 11)
+    ber_values = []
+
+    for snr in snr_values:
+        received, _ = simulate_channel(snr)
+        data = np.random.randint(0, 2, len(received))
+        ber = calculate_ber(received, data)
+        ber_values.append(ber)
+
+    plt.figure()
+    plt.semilogy(snr_values, ber_values, 'o-')
+    plt.xlabel('SNR (dB)')
+    plt.ylabel('Bit Error Rate (BER)')
+    plt.title('BER vs SNR for Gaussian Wiretap Channel')
+    plt.grid(True)
+    plt.show()
+
+if __name__ == "__main__":
+    main()

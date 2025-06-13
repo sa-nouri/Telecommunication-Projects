@@ -41,6 +41,23 @@ channelStartingFreq = str2double('2.462e9');
 % Run complete
 fprintf('Desired channel(s) scanned\n');
 
+% USRP Receiving
+% This script implements a receiver for USRP hardware.
+
+function [output] = usrp_receiving(signal, fs)
+    % USRP_RECEIVING Processes the received signal from USRP hardware.
+    %
+    % Args:
+    %     signal (array): Received signal.
+    %     fs (float): Sampling frequency.
+    %
+    % Returns:
+    %     array: Processed output signal.
+
+    % Apply a simple low-pass filter
+    output = lowpass(signal, fs/4, fs);
+end
+
 
 
 

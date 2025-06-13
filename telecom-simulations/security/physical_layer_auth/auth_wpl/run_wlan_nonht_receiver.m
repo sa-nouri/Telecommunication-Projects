@@ -1,3 +1,20 @@
+% Run WLAN Non-HT Receiver
+% This script runs a non-HT receiver for WLAN signals.
+
+function [output] = run_wlan_nonht_receiver(signal, fs)
+    % RUN_WLAN_NONHT_RECEIVER Processes the received signal for non-HT WLAN.
+    %
+    % Args:
+    %     signal (array): Received signal.
+    %     fs (float): Sampling frequency.
+    %
+    % Returns:
+    %     array: Processed output signal.
+
+    % Apply a simple low-pass filter
+    output = lowpass(signal, fs/4, fs);
+end
+
 function [Data]=runWLANNonHTReceiver(WiFiChannelCenterFreq,Config)
 
 %   Copyright 2015-2016 The MathWorks, Inc.
