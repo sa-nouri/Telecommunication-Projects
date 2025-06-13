@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,matlab
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,jupyternotebooks,matlab
 
@@ -224,3 +223,41 @@ pyrightconfig.json
 # Local
 
 .vscode/
+
+# Ignore Python virtual environments
+venv/
+.env/
+
+# Ignore Jupyter notebook checkpoints
+**/.ipynb_checkpoints/
+
+# Ignore MATLAB generated files
+*.asv
+*.m~
+*.fig
+*.mat
+*.mex*
+
+# Ignore large data/output files
+*.h5
+*.csv
+*.npz
+*.npy
+*.log
+*.out
+*.dat
+*.tmp
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore results and cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Simulink cache and code generation
+slprj/
+sfprj/
+*.slxc
