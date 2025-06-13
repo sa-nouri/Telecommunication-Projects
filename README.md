@@ -1,81 +1,128 @@
-# Telecommunication Research Projects
+# Telecommunications Research Projects
 
-This repository contains a collection of research and laboratory projects in telecommunications, focusing on various aspects of wireless communication, digital communication, network optimization, and security.
+This repository contains a collection of telecommunications research projects, including implementations of communication systems, network optimization algorithms, and security mechanisms.
 
 ## Repository Structure
 
 ```
-research/
-├── wireless_communication/
-│   └── GaussianWiretrapChannel/
-│       ├── Gaussian_Wiretrap_Channel.py
-│       ├── MI_BER.ipynb
-│       └── README.md
-├── digital_communication/
-│   └── DigitalCommunication/
-│       ├── PRE_LAB04.m
-│       ├── PreLab3.m
-│       ├── code.m
-│       ├── dcl_prelab2.m
-│       └── message.wav
-├── network_optimization/
-│   ├── ResourceAllocation/
-│   │   └── multi-knapsack.ipynb
-│   ├── TrafficClassification/
-│   │   └── get_dataset.ipynb
-│   └── AgentPrediction/
-│       └── episode_mc.py
-└── security/
-    └── AuthenticationWPL/
-        ├── CarrierFrequencyOffset.m
-        ├── CfoCapturing.m
-        ├── HTFE.m
-        ├── Receiver.m
-        ├── SDR_Receiver.m
-        ├── SdruReciever.m
-        ├── UsrpReceiving.m
-        ├── fff.slx
-        ├── lab_1.m
-        └── runWLANNonHTReceiver.m
+telecom-simulations/
+├── communication/           # Communication systems
+│   └── wireless/           # Wireless communication
+│       └── wiretap/        # Wiretap channel implementations
+│           ├── wiretap_channel.py
+│           ├── tests/
+│           └── README.md
+├── networking/             # Network optimization
+│   └── optimization/       # Optimization algorithms
+│       └── agent_prediction/
+│           └── agent_prediction_lab/
+│               ├── agent_prediction.py
+│               ├── tests/
+│               └── README.md
+└── security/              # Security mechanisms
+    └── physical_layer_auth/
+        └── auth_wpl/      # Physical layer authentication
+            ├── receivers/  # Receiver implementations
+            ├── estimation/ # Frequency estimation
+            ├── simulation/ # Simulation files
+            ├── tests/     # Test files
+            └── README.md
 ```
 
-## Project Categories
+## Modules
 
-### Wireless Communication
-- **Gaussian Wiretap Channel**: Implementation and analysis of Gaussian wiretap channel models, including mutual information and bit error rate calculations.
+### Communication Module
+- Wireless communication systems
+- Wiretap channel implementations
+- Signal processing algorithms
 
-### Digital Communication
-- **Digital Communication Labs**: MATLAB implementations for various digital communication concepts and laboratory exercises.
+### Networking Module
+- Network optimization algorithms
+- Agent prediction using Monte Carlo methods
+- Traffic classification techniques
 
-### Network Optimization
-- **Resource Allocation**: Multi-knapsack problem implementation for resource allocation optimization.
-- **Traffic Classification**: Dataset processing and analysis for network traffic classification.
-- **Agent Prediction**: Monte Carlo algorithm implementation for activity detection and prediction.
+### Security Module
+- Physical layer authentication
+- Carrier frequency offset estimation
+- High-throughput frequency estimation
+- SDR and USRP receiver implementations
 
-### Security
-- **Authentication WPL**: Wireless physical layer authentication implementations using MATLAB and USRP hardware.
+## Requirements
 
-## Development Guidelines
+### Python Requirements
+- Python 3.8 or later
+- NumPy
+- SciPy
+- Matplotlib
 
-1. **Code Organization**:
-   - Each project should have its own README.md with specific setup and usage instructions
-   - Keep related files together in project-specific directories
-   - Use consistent naming conventions within each project
+### MATLAB Requirements
+- MATLAB R2019b or later
+- Signal Processing Toolbox
+- Communications Toolbox
+- USRP Support Package (for hardware functionality)
 
-2. **Documentation**:
-   - Include clear comments in code
-   - Document dependencies and requirements
-   - Provide example usage where applicable
+## Installation
 
-3. **Version Control**:
-   - Use atomic commits for each logical change
-   - Write clear commit messages
-   - Keep the repository clean and organized
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/Telecommunication-Projects.git
+cd Telecommunication-Projects
+```
 
-## License
+2. Install Python dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+3. For MATLAB code, ensure you have the required toolboxes installed.
+
+## Usage
+
+### Python Code
+```python
+from telecom_simulations.communication.wireless.wiretap import WiretapChannel, ChannelParameters
+
+# Create wiretap channel
+params = ChannelParameters(snr_main=10.0, snr_eve=5.0, num_symbols=1000, modulation='BPSK')
+channel = WiretapChannel(params)
+
+# Simulate channel
+main_signal, eve_signal = channel.simulate()
+```
+
+### MATLAB Code
+```matlab
+% Basic receiver
+fs = 1000;
+signal = your_signal;
+output = receiver(signal, fs);
+
+% CFO estimation
+cfo = cfo_capturing(signal, fs);
+```
+
+## Testing
+
+### Python Tests
+```bash
+pytest telecom-simulations/communication/wireless/wiretap/tests/
+pytest telecom-simulations/networking/optimization/agent_prediction/agent_prediction_lab/tests/
+```
+
+### MATLAB Tests
+```matlab
+% Run all tests
+runtests('telecom-simulations/security/physical_layer_auth/auth_wpl/tests')
+```
 
 ## Contributing
 
-For any questions, suggestions, or issues, please open an issue in this repository.
+1. Fork the repository
+2. Create a feature branch
+3. Add your changes
+4. Add tests for new functionality
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
