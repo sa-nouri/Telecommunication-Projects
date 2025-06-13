@@ -49,3 +49,20 @@ end
 % Run complete
 fprintf('Desired channel(s) scanned\n');
 
+% SDR Receiver
+% This script implements a software-defined radio (SDR) receiver.
+
+function [output] = sdr_receiver(signal, fs)
+    % SDR_RECEIVER Processes the received signal using SDR techniques.
+    %
+    % Args:
+    %     signal (array): Received signal.
+    %     fs (float): Sampling frequency.
+    %
+    % Returns:
+    %     array: Processed output signal.
+
+    % Apply a simple low-pass filter
+    output = lowpass(signal, fs/4, fs);
+end
+
