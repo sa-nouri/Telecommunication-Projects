@@ -1,7 +1,10 @@
-# Traffic Classification
+# Traffic Classification Lab
 
 ## Description
-This project provides scripts and notebooks for obtaining and processing network traffic datasets for classification tasks.
+Scripts and notebooks for obtaining and processing network traffic datasets for classification tasks.
+
+## Scripts
+- `traffic_dataset_preprocessing.ipynb`: Jupyter notebook for dataset download and preprocessing
 
 ## Setup
 - Python 3.7+
@@ -18,14 +21,13 @@ pip install pandas scikit-learn jupyter
 ```
 
 ## Usage
-- Open the notebook:
-  ```bash
-  jupyter notebook get_dataset.ipynb
-  ```
-- Follow the instructions in the notebook to download, preprocess, and analyze the dataset.
+Open the notebook:
+```bash
+jupyter notebook traffic_dataset_preprocessing.ipynb
+```
 
 ## Results
-- The notebook outputs processed datasets and basic analysis/visualizations.
+The notebook outputs processed datasets and basic analysis/visualizations.
 
 ## Data
 - The notebook may download external datasets; see notebook instructions for details. 
